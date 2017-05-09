@@ -2,6 +2,7 @@
 Files for multi-trait GS paper
 
 The following files contains:
+
 pheno: All phenotypic information used in this paper.
 
 snps: All molecular markers used to create a aditive relationship matrix for the GBLUP models.
@@ -9,6 +10,8 @@ snps: All molecular markers used to create a aditive relationship matrix for the
 GS_1st_stage.R: Script for obtaining the adjusted means in the 1st stage analysis.
 
 GS_2st_stage.R: Script for obtaining cross-validation results in the 2nd stage analysis.
+
+CI.R: function for calculating coincidence index.
 
 correlations.R: Script for obtaining genetic and residual correlations.
 

@@ -1,3 +1,18 @@
+###########################################################################
+## 
+## File Name: 'GS_1st_stage'
+##
+## Author:    SB Fernandes < samuelfernandes@agronomo.eng.br >
+##
+## Date:      May 10th, 2017
+##
+## Contents:  Asreml models for obtaining adjusted means by location
+##            
+## input:  "pheno.csv"  
+##
+## output: "means.csv"
+##
+############################################################################
 #setwd("...")
 library(asreml)
 library(reshape2)

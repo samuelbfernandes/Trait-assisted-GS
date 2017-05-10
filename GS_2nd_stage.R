@@ -11,9 +11,10 @@
 ##
 ## input:  "snps.csv", "means.csv"  
 ##
-## output: "ginv.csv", "means2.csv", "accuracies.csv", "gebv.csv"(one for each model)
+## output: "ginv.csv", "means2.csv", "accuracies.csv", 
+##         "gebv.csv"(one for each model)
 ##
-## source: "CI.R"
+## auxiliar source code: "CI.R"
 ############################################################################
 #setwd("")
 library(asreml)

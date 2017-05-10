@@ -2,7 +2,8 @@
 ## 
 ## File Name: 'GS_1st_stage'
 ##
-## Author:    SB Fernandes < samuelfernandes@agronomo.eng.br >
+## Authors:    SB Fernandes < samuelfernandes@agronomo.eng.br >
+##             KOG Dias < kaioolimpio@hotmail.com >  
 ##
 ## Date:      May 10th, 2017
 ##

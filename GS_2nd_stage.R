@@ -1,5 +1,21 @@
+###########################################################################
+## 
+## File Name: 'GS_2nd_stage'
+##
+## Authors:    SB Fernandes < samuelfernandes@agronomo.eng.br >
+##             KOG Dias < kaioolimpio@hotmail.com >  
+## Date:      May 10th, 2017
+##
+## Contents:  Asreml-r codes for obtaining cross-validation results 
+##            for single trait and multi-trait GBLUP
+##
+## input:  "snps.csv", "means.csv"  
+##
+## output: "ginv.csv", "means2.csv", "accuracies.csv", "gebv.csv"(one for each model)
+##
+## source: "CI.R"
+############################################################################
 #setwd("")
-#### Get means file from GS_1st_stage.R #####
 library(asreml)
 require(cvTools)
 require(plyr)
@@ -35,7 +51,7 @@ rm(names,kmatrix)
 A[lower.tri(A)]<-NA
 A<-na.omit(melt(A))
 rownames(A)<-NULL
-#ginv <- read.csv("ginv.txt", sep="")##### if saved 
+#ginv <- read.csv("ginv.csv")##### if saved 
 ginv<-data.frame(A[,2],A[,1],A[,3])
 colnames(ginv)<- c("Row", "Column", "GINV")
 attr(ginv,"rowNames")<-1:453
@@ -686,28 +702,28 @@ for(j in 1:length(sort)){
 rm(test, x,x1,x2, ind, i, j, multitraitma, ram, rm)
 
 ############## saving all GEBV files ######################
-# write.table(gebva, "gebva.txt", col.names=T, row.names=T)
-# write.table(gebvh1, "gebvh1.txt", col.names=T, row.names=T)
-# write.table(gebvh2, "gebvh2.txt", col.names=T, row.names=T)
-# write.table(gebvh3, "gebvh3.txt", col.names=T, row.names=T)
-# write.table(gebvh4, "gebvh4.txt", col.names=T, row.names=T)
-# write.table(gebvm, "gebvm.txt", col.names=T, row.names=T)
-# write.table(gebvma, "gebvma.txt", col.names=T, row.names=T)
-# write.table(gebvmh3, "gebvmh3.txt", col.names=T, row.names=T)
-# write.table(gebvmh4, "gebvmh4.txt", col.names=T, row.names=T)
-# write.table(gebvy, "gebvy.txt", col.names=T, row.names=T)
-# write.table(gebvya, "gebvya.txt", col.names=T, row.names=T)
-# write.table(gebvyh1, "gebvyh1.txt", col.names=T, row.names=T)
-# write.table(gebvyh2, "gebvyh2.txt", col.names=T, row.names=T)
-# write.table(gebvyh3, "gebvyh3.txt", col.names=T, row.names=T)
-# write.table(gebvyh4, "gebvyh4.txt", col.names=T, row.names=T)
-# write.table(gebvym, "gebvym.txt", col.names=T, row.names=T)
-# write.table(gebvymm, "gebvymm.txt", col.names=T, row.names=T)
-# write.table(gebvyh4m, "gebvyh4m.txt", col.names=T, row.names=T)
-# write.table(gebvyh3m, "gebvyh3m.txt", col.names=T, row.names=T)
-# write.table(gebvyh2m, "gebvyh2m.txt", col.names=T, row.names=T)
-# write.table(gebvyh1m, "gebvyh1m.txt", col.names=T, row.names=T)
-# write.table(gebvyam, "gebvyam.txt", col.names=T, row.names=T)
+# write.csv(gebva, "gebva.csv", row.names = FALSE)
+# write.csv(gebvh1, "gebvh1.csv", row.names = FALSE)
+# write.csv(gebvh2, "gebvh2.csv", row.names = FALSE)
+# write.csv(gebvh3, "gebvh3.csv", row.names = FALSE)
+# write.csv(gebvh4, "gebvh4.csv", row.names = FALSE)
+# write.csv(gebvm, "gebvm.csv", row.names = FALSE)
+# write.csv(gebvma, "gebvma.csv", row.names = FALSE)
+# write.csv(gebvmh3, "gebvmh3.csv", row.names = FALSE)
+# write.csv(gebvmh4, "gebvmh4.csv", row.names = FALSE)
+# write.csv(gebvy, "gebvy.csv", row.names = FALSE)
+# write.csv(gebvya, "gebvya.csv", row.names = FALSE)
+# write.csv(gebvyh1, "gebvyh1.csv", row.names = FALSE)
+# write.csv(gebvyh2, "gebvyh2.csv", row.names = FALSE)
+# write.csv(gebvyh3, "gebvyh3.csv", row.names = FALSE)
+# write.csv(gebvyh4, "gebvyh4.csv", row.names = FALSE)
+# write.csv(gebvym, "gebvym.csv", row.names = FALSE)
+# write.csv(gebvymm, "gebvymm.csv", row.names = FALSE)
+# write.csv(gebvyh4m, "gebvyh4m.csv", row.names = FALSE)
+# write.csv(gebvyh3m, "gebvyh3m.csv", row.names = FALSE)
+# write.csv(gebvyh2m, "gebvyh2m.csv", row.names = FALSE)
+# write.csv(gebvyh1m, "gebvyh1m.csv", row.names = FALSE)
+# write.csv(gebvyam, "gebvyam.csv", row.names = FALSE)
 ###############################################################
 
 ############## saving all accuracies ######################
@@ -718,7 +734,7 @@ for(i in 1:length(vars)){
   AC<-cbind(AC,eval(parse(text=vars[i])))
   colnames(AC)[i]<-vars[i]
 }
-# write.table(AC, "accuracies.txt", col.names=T, row.names=F)
+# write.csv(AC, "accuracies.csv", row.names=F)
 #### Coincidence index ####
 source("CI.R")
 ### For each CI one must replace gebvy (standard GS) for the desired one ####

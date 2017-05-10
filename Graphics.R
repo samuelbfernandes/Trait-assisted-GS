@@ -6,15 +6,18 @@
 ##
 ## Date:      May 10th, 2017
 ##
-## Contents:  ggplot2 codes to create all figures used in this paper
+## Contents: R codes from ggplot2 package to create all figures 
+##           used in this paper
 ##
-############## Get "accuracies.csv" file from GS_2st_stage.R ###############
-################# Get "corr.csv" file from correlations.R ##################
+## input:  "accuracies.csv" "corr.csv"  
+##
+## output: Fig1, Fig2, Fig3, Fig4 
+##
 ############################################################################
 library(ggplot2)
 library(grid)
 
-AC<-read.table("accuracies.txt", h=TRUE)
+AC<-read.table("accuracies.csv", h=TRUE)
 AC<-cbind(apply(AC, 2, mean),apply(AC, 2, sd))
 AC<-data.frame(mode=rownames(AC),AC)
 colnames(AC)<-c("model","mean", "sd")
@@ -59,7 +62,7 @@ ggplot(corr, aes(x = trait, y = cor, fill=as.character(interaction(corr$var,corr
   theme(axis.title.y = element_text(vjust=1.3,colour = "black",family="Times", size = 25),axis.text.y = element_text(  colour = "black", family="Times"), axis.ticks = element_blank())+
   theme(panel.grid.major.x = element_blank(), panel.grid.minor = element_blank())+theme(legend.title=element_blank(),legend.text = element_text(family="Times", face="bold",size = 20),legend.key.width = unit(1, 'cm'))
 
-ggsave(file="cor.pdf",width=8,height=5,units=c("in"),dpi=300,family="Times")
+ggsave(file="Fig2.pdf",width=8,height=5,units=c("in"),dpi=300,family="Times")
 
 #### Figure 3  #####
 indirect<-AC[c("acy","acm_y","ach1_y","ach2_y","ach3_y","ach4_y","aca_y", "acmh3", "acmh4","acma"),]

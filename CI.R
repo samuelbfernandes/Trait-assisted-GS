@@ -1,4 +1,21 @@
-#### coincidence index (Hamblin and Zimmermann 1986) ####
+###########################################################################
+## 
+## File Name: 'CI'
+##
+## Author:    SB Fernandes < samuelfernandes@agronomo.eng.br >
+##             
+## Date:      May 10th, 2017
+##
+## Contents:  Auxiliar codes for obtaining coincidence index 
+##            (Hamblin and Zimmermann, 1986) for GEBV's from 
+##            GS-cross validations
+##
+## input:  GEBV's from different models and adjusted means 
+##
+## output: mean and standard deviation of a given number of CI's
+##
+############################################################################
+
 #x: GEBV's from a given model
 #y: reference means
 #s: proportion of selection

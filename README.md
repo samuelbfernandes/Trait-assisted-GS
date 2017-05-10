@@ -1,5 +1,5 @@
 # GS-2017
-Files for multi-trait GS paper
+Files for trait-assisted GS paper
 
 The following files contains:
 

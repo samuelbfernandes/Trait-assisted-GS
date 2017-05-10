@@ -1,5 +1,19 @@
+###########################################################################
+## 
+## File Name: 'Graphics'
+##
+## Author:    SB Fernandes < samuelfernandes@agronomo.eng.br >
+##
+## Date:      May 10th, 2017
+##
+## Contents:  ggplot2 codes to create all figures used in this paper
+##
+############## Get "accuracies.csv" file from GS_2st_stage.R ###############
+################# Get "corr.csv" file from correlations.R ##################
+############################################################################
 library(ggplot2)
-#### Get accuracies file from GS_2nd_stage.R #####
+library(grid)
+
 AC<-read.table("accuracies.txt", h=TRUE)
 AC<-cbind(apply(AC, 2, mean),apply(AC, 2, sd))
 AC<-data.frame(mode=rownames(AC),AC)
@@ -26,10 +40,8 @@ ggplot(standard, aes(x = model, y = mean)) +
 ggsave(file="Fig1.eps",width=8,height=5,units=c("in"),dpi=300,family="Times")
 
 #### Figure 2  #####
-#### get corr file from correlations.R  ######
 corr<-read.csv("corr.csv")
 colnames(corr)<-c("trait","var", "cor","se", "sign")
-color<-
 pluser<- corr$cor+corr$se
 minuser<-  ifelse(corr$cor-corr$se>0, corr$cor-corr$se,0)
 library(scales)
@@ -38,7 +50,7 @@ ggplot(corr, aes(x = trait, y = cor, fill=as.character(interaction(corr$var,corr
   geom_errorbar(aes(ymin = minuser, ymax = pluser), width = 0.2,position =position_dodge(width = .8))+
   scale_y_continuous("Correlation",limits=c(0,1), breaks=c(0, 0.25, 0.5, 0.75, 1))+
   scale_x_discrete(name="",limits=c("M","H1","H2","H3","H4","A"), labels=c("M","H1","H2","H3","H4","A"))+
-  scale_fill_manual(name="", limits=c("corg.pos", "corg.neg", "corres.pos", "corres.neg"),values = alpha(c("blue","blue","red","red"), c(1,.3,1,.3)),
+  scale_fill_manual(name="", limits=c("corg.pos", "corg.neg", "corres.pos", "corres.neg"),values = alpha(c("darkgreen","darkgreen","red","red"), c(1,.3,1,.3)),
                     labels=c("corg.pos"=expression(cor[g]*paste("","+")),"corg.neg"=expression(cor[g]*paste(""," -")),
                              "corres.pos"=expression(cor[r]*paste("","+")),"corres.neg"=expression(cor[r]*paste(""," -"))))+
   theme_bw(base_size = 20) + theme( panel.border = element_rect(fill = NA, colour="black"))+
@@ -48,7 +60,6 @@ ggplot(corr, aes(x = trait, y = cor, fill=as.character(interaction(corr$var,corr
   theme(panel.grid.major.x = element_blank(), panel.grid.minor = element_blank())+theme(legend.title=element_blank(),legend.text = element_text(family="Times", face="bold",size = 20),legend.key.width = unit(1, 'cm'))
 
 ggsave(file="cor.pdf",width=8,height=5,units=c("in"),dpi=300,family="Times")
-
 
 #### Figure 3  #####
 indirect<-AC[c("acy","acm_y","ach1_y","ach2_y","ach3_y","ach4_y","aca_y", "acmh3", "acmh4","acma"),]

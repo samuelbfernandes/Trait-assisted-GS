@@ -1,15 +1,13 @@
-# GS-2017
-Files for trait-assisted GS paper
-
+# Efficiency of multi-trait, indirect, and trait-assisted genomic selection for improvement of biomass sorghum
 The following files contains:
 
-pheno: All phenotypic information used in this paper.
+pheno: Phenotypic information used in this paper.
 
-snps: All molecular markers used to create a aditive relationship matrix for the GBLUP models.
+snps: Molecular markers used to create a aditive relationship matrix for GBLUP models.
 
 GS_1st_stage.R: Script for obtaining the adjusted means in the 1st stage analysis.
 
-GS_2nd_stage.R: Script for obtaining cross-validation results in the 2nd stage analysis.
+GS_2nd_stage.R: Script for cross-validation in the 2nd stage analysis.
 
 CI.R: function for calculating coincidence index.
 

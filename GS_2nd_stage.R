@@ -6,8 +6,8 @@
 ##             KOG Dias < kaioolimpio@hotmail.com >  
 ## Date:      May 10th, 2017
 ##
-## Contents:  Asreml-r codes for obtaining cross-validation results 
-##            for single trait and multi-trait GBLUP
+## Contents:  Asreml-r codes for cross-validation
+##            of single trait and multi-trait GBLUP
 ##
 ## input:  "snps.csv", "means.csv"  
 ##
@@ -23,10 +23,13 @@ require(plyr)
 library(rrBLUP)
 library(MASS)
 library(reshape)
+
 snps<-read.csv("snps.csv",row.names = 1)
 means<-read.csv("means.csv",row.names = 1)
+
 #using only phenotypes with snp information
 means<-droplevels(means[means$GENO%in%rownames(snps),])
+
 #changing names for numbers
 names<-as.numeric(as.factor(rownames(snps)))
 means$geno<-NA
@@ -36,23 +39,21 @@ for(i in 1:453){
 means<-means[,c("geno","LOC","h1", "h2", "h3", "h4", "M", "Y")]
 means<-transform(means, LOC=factor(LOC),geno=factor(geno))
 
-
 #### Creating a Relationship Matrix from SNPs information #####
-
 kmatrix=A.mat(snps,return.imputed=F)
 rm(snps,i)
-# kmatrix<-as.matrix(read.table("kmatrix.txt", h=T)) ##### if already created  
+# kmatrix<-as.matrix(read.table("kmatrix.txt", h=T)) ##### importing previously calculated kinship matrix.
 #inverting relationship matrix
 A<-ginv(kmatrix)
 colnames(A)<-names
 rownames(A)<-names
 rm(names,kmatrix)
 
-#changing inverted A matrix format to use in asreml
+#changing inverted A matrix format to be used in asreml
 A[lower.tri(A)]<-NA
 A<-na.omit(melt(A))
 rownames(A)<-NULL
-#ginv <- read.csv("ginv.csv")##### if saved 
+#ginv <- read.csv("ginv.csv")
 ginv<-data.frame(A[,2],A[,1],A[,3])
 colnames(ginv)<- c("Row", "Column", "GINV")
 attr(ginv,"rowNames")<-1:453
@@ -61,11 +62,12 @@ rm(A)
 
 ###### Means over location ##########
 means2<-ddply(means,.(geno), summarize, Y=mean(Y,na.rm=T), M=mean(M,na.rm=T),  h1=mean(h1,na.rm=T), h2=mean(h2,na.rm=T), h3=mean(h3,na.rm=T), h4=mean(h4,na.rm=T)  )
+
 ##### Area Under Growth Progress Curve #####
 means2$A<-(((means2$h1+means2$h2)/2)*(30)+((means2$h2+means2$h3)/2)*(30)+((means2$h3+means2$h4)/2)*(30))
 #write.csv(means2, "means2.csv")
 
-#### sorts for cross-validation ####
+#### creating folders 5-fold cross-validation ####
 sort<-list()
 for(a in 1:30){
   for(j in 1:5){
@@ -83,7 +85,7 @@ rm(a, folds, j, cv, Sample)
 
 ##### Standard  GS Y ####
 acy<-c() ## store accuracies
-gebvy<-1:453  ## store GEBV's
+gebvy<-1:453  ## store GEBVs
 for(j in 1:length(sort)){
   ry<-list()
   for(i in 1:5){

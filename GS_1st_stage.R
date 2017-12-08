@@ -18,7 +18,7 @@
 library(asreml)
 library(reshape2)
 
-#### load phenotypes and subseting by location #####
+#### loading phenotypes and subseting it by location #####
 pheno<-read.csv("pheno.csv", stringsAsFactors=F)
 pheno<-transform(pheno, LOC=factor(LOC),  GENO=factor(GENO),	range=factor(range),	row=factor(row),	BLOCK=factor(BLOCK))
 pheno<-pheno[order(pheno$LOC, pheno$range, pheno$row, pheno$BLOCK, pheno$GENO),]

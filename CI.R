@@ -12,7 +12,7 @@
 ##
 ## input:  GEBV's from different models and adjusted means 
 ##
-## output: mean and standard deviation of a given number of CI
+## output: mean and standard deviation of a given CI
 ##
 ############################################################################
 

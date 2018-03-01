@@ -1,5 +1,5 @@
 # Efficiency of multi-trait, indirect, and trait-assisted genomic selection for improvement of biomass sorghum
-Fernandes, S.B., Dias, K.O.G., Ferreira, D.F. et al. Theor Appl Genet (2017). https://doi.org/10.1007/s00122-017-3033-y
+Fernandes, S.B., Dias, K.O.G., Ferreira, D.F. et al. Theor Appl Genet (2018). https://doi.org/10.1007/s00122-017-3033-y
 
 The following files contains:
 

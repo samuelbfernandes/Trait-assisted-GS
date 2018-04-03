@@ -130,6 +130,10 @@ h4_14<-asreml(fixed=h4~ GENO,
 # (AIC2 = -2*lM2 + 2*KM2 ) #aic for model 2
 ############################
 
+####### Using asremlPlus #######
+library(asremlPlus)
+info.crit.asreml(Y_12)
+
 ###### predicted values ######
 vars<-ls()
 vars<-vars[grepl("._", vars)]

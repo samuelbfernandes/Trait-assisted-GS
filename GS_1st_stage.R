@@ -3,7 +3,7 @@
 ## File Name: 'GS_1st_stage'
 ##
 ## Authors:    SB Fernandes < samuelfernandes@agronomo.eng.br >
-##             KOG Dias < kaioolimpio@hotmail.com >  
+##             KOG Dias < kaio.o.dias@ufv.br >  
 ##
 ## Date:      Jan 28th, 2022
 ##
@@ -191,7 +191,8 @@ results <- data.frame(trait = character(), LOC = character(),
                       GENO = character(), predicted = numeric())
 #Adjusting means for all models at once
 for(i in 1:length(vars)){
-  x <- predict(eval(parse(text = vars[i])), classify = "GENO",
+  model <- eval(parse(text = vars[i]))
+  x <- predict(model, classify = "GENO",
                sed = TRUE, pworkspace = 128e6, maxit = 100)$pvals[,c(1,2)]
   results <-
     rbind(results, data.frame(
@@ -199,6 +200,7 @@ for(i in 1:length(vars)){
       LOC = gsub(paste(gsub("_..", "", vars[i]), "_", sep = ""), "", vars[i]),
       x
     ))
+  rm(model)
 }
 colnames(results) <- c("trait", "LOC",  "GENO",   "pred")
 #data in a wide format table
